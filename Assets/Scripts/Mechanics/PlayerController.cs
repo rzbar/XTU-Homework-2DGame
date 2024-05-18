@@ -28,13 +28,16 @@ namespace Platformer.Mechanics
         public float jumpTakeOffSpeed = 7;
 
         public JumpState jumpState = JumpState.Grounded;
-        private bool stopJump;
+        private bool stopJump => jumpedTimes == maxJumpTime;
         /*internal new*/ public Collider2D collider2d;
         /*internal new*/ public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
 
         bool jump;
+        bool stopForce;
+        private int jumpedTimes = 0;
+        private int maxJumpTime = 2;
         Vector2 move;
         SpriteRenderer spriteRenderer;
         internal Animator animator;
@@ -57,12 +60,14 @@ namespace Platformer.Mechanics
             {
                 move.x = Input.GetAxis("Horizontal");
 
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
-                    jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
+                if (Input.GetButtonDown("Jump") && IsGrounded)
                 {
-                    stopJump = true;
-                    Schedule<PlayerStopJump>().player = this;
+                    jumpState = JumpState.PrepareToJump;
+                    stopForce = false;
+                }
+                if (Input.GetButtonUp("Jump"))
+                {
+                    stopForce = true;
                 }
             }
             else
@@ -75,13 +80,12 @@ namespace Platformer.Mechanics
 
         void UpdateJumpState()
         {
-            jump = false;
             switch (jumpState)
             {
                 case JumpState.PrepareToJump:
                     jumpState = JumpState.Jumping;
                     jump = true;
-                    stopJump = false;
+                    jumpedTimes++;
                     break;
                 case JumpState.Jumping:
                     if (!IsGrounded)
@@ -91,6 +95,11 @@ namespace Platformer.Mechanics
                     }
                     break;
                 case JumpState.InFlight:
+                    if (!IsGrounded && Input.GetButtonDown("Jump") && !stopJump)
+                    {
+                        jumpedTimes++;
+                        jump = true;
+                    }
                     if (IsGrounded)
                     {
                         Schedule<PlayerLanded>().player = this;
@@ -99,25 +108,32 @@ namespace Platformer.Mechanics
                     break;
                 case JumpState.Landed:
                     jumpState = JumpState.Grounded;
+                    jumpedTimes = 0;
                     break;
             }
         }
 
         protected override void ComputeVelocity()
         {
-            if (jump && IsGrounded)
+            if (jump)
             {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
                 jump = false;
             }
-            else if (stopJump)
+            else if (stopForce)
             {
-                stopJump = false;
                 if (velocity.y > 0)
                 {
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
             }
+            //else if (stopJump)
+            //{
+            //    if (velocity.y > 0)
+            //    {
+            //        velocity.y = velocity.y * model.jumpDeceleration;
+            //    }
+            //}
 
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;

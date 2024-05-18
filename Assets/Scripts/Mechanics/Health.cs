@@ -49,7 +49,7 @@ namespace Platformer.Mechanics
         /// </summary>
         public void Die()
         {
-            while (currentHP > 0) Decrement(-100f);
+            while (currentHP > 0) Decrement(100f);
         }
 
         void Awake()
