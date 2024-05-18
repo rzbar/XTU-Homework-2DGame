@@ -99,6 +99,7 @@ namespace Platformer.Mechanics
                     {
                         jumpedTimes++;
                         jump = true;
+                        stopForce = false;
                     }
                     if (IsGrounded)
                     {
