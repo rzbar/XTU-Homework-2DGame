@@ -5,19 +5,16 @@ namespace Platformer.Mechanics.AttackForm
 {
     public class NormalAttack : AttackObject
     {
+        private int dir;
         private void Start()
         {
             print("Õ¶¿Õ²¨");
+            dir = model.player.left;
         }
-        protected override void Update()
+        protected override void Handle()
         {
-            base.Update();
-            Handle();
-        }
-        public override void Handle()
-        {
-            transform.position += 0.01f*Vector3.right;
-            if(tick > 120)
+            transform.localPosition += 0.1f*dir*Vector3.right;
+            if(tick > 30)
             {
                 Destroy(gameObject);
             }
