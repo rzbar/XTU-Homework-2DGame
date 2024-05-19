@@ -1,6 +1,7 @@
 using System;
 using Platformer.Gameplay;
 using UnityEngine;
+using UnityEngine.UI;
 using static Platformer.Core.Simulation;
 
 namespace Platformer.Mechanics
@@ -22,6 +23,8 @@ namespace Platformer.Mechanics
 
         public float currentHP;
 
+        public Image hpBar;
+
         /// <summary>
         /// Increment the HP of the entity.
         /// </summary>
@@ -37,6 +40,11 @@ namespace Platformer.Mechanics
         public void Decrement(float damage)
         {
             currentHP = Mathf.Clamp(currentHP - damage, 0, maxHP);
+            if(hpBar!=null)
+            {
+                Vector3 v = hpBar.rectTransform.localScale;
+                hpBar.rectTransform.localScale = new Vector3((currentHP / maxHP), v.y, v.z);
+            }
             if (currentHP == 0)
             {
                 
