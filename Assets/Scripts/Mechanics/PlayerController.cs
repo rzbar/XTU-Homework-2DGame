@@ -21,6 +21,7 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
         public AttackScriptableObject attackScriptableObject;
+        public bool canHurt;
 
         /// <summary>
         /// Max horizontal speed of the player.
@@ -193,6 +194,8 @@ namespace Platformer.Mechanics
         {
             Hurt,
             Normal,
+            Attack,
+            WD,
         }
 
         IEnumerator Hiraishinn()
