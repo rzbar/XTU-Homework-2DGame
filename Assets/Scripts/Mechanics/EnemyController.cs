@@ -43,6 +43,13 @@ namespace Platformer.Mechanics
                 ev.player = player;
                 ev.enemy = this;
             }
+            AttackObject attact=collision.gameObject.GetComponent<AttackObject>();
+            if(attact != null)
+            {
+                var ev = Schedule<EnemyHurt>();
+                ev.enemy = this;
+                ev.hurtNum = attact.damage;
+            }
         }
 
         protected virtual void Update()
