@@ -17,6 +17,7 @@ namespace Platformer.Mechanics
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
+        public AttackScriptableObject attackScriptableObject;
 
         /// <summary>
         /// Max horizontal speed of the player.
@@ -71,7 +72,7 @@ namespace Platformer.Mechanics
                 #region fight
                 if (Input.GetKeyDown(KeyCode.J))
                 {
-                    print(1);
+                    Instantiate(attackScriptableObject.attackObjects[0],transform.position,Quaternion.identity,null);
                 }
                 #endregion fight
             }
