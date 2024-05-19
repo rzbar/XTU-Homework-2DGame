@@ -38,5 +38,10 @@ namespace Platformer.Model
         /// </summary>
         public float jumpDeceleration = 0.5f;
 
+        /// <summary>
+        /// Attack Form
+        /// </summary>
+        public AttackScriptableObject attackScriptableObject;
+
     }
 }
