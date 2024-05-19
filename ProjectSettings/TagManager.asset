@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - TutorialRequirement
+  - Ground
+  - Token
+  - Enemy
   layers:
   - Default
   - TransparentFX
