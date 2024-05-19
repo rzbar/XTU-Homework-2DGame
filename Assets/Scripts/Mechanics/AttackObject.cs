@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Platformer.Mechanics
 {
-    public class AttackController : MonoBehaviour
+    public class AttackObject : MonoBehaviour
     {
         public float damage;
         public Collider2D[] attackAreas;
