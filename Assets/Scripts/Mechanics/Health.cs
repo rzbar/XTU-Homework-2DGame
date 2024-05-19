@@ -39,6 +39,7 @@ namespace Platformer.Mechanics
             currentHP = Mathf.Clamp(currentHP - damage, 0, maxHP);
             if (currentHP == 0)
             {
+                
                 var ev = Schedule<HealthIsZero>();
                 ev.health = this;
             }
