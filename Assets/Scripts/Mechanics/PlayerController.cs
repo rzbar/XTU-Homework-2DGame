@@ -66,7 +66,6 @@ namespace Platformer.Mechanics
         protected override void Update()
         {
             cooldown = Mathf.Clamp(Time.deltaTime - Time.deltaTime,0,defaultCd * motifyCd);
-            print(cooldown);
             if (controlEnabled)
             {
                 #region move
@@ -81,9 +80,14 @@ namespace Platformer.Mechanics
                 #region fight
                 if (Input.GetKeyDown(KeyCode.J) && cooldown<=0)
                 {
-                    var obj = Instantiate(attackScriptableObject.attackObjects[0],transform.position,Quaternion.identity,null) as NormalAttack;
+                    var obj = Instantiate(attackScriptableObject.attackObjects[0],transform.position,Quaternion.identity,null);
                     cooldown = defaultCd * motifyCd;
                     //obj.transform.localScale = new Vector3(move.x>0?1:-1, 1, 1);
+                }
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    StartCoroutine(Hiraishinn());
+                    cooldown = defaultCd * motifyCd;
                 }
                 #endregion fight
             }
@@ -189,6 +193,17 @@ namespace Platformer.Mechanics
         {
             Hurt,
             Normal,
+        }
+
+        IEnumerator Hiraishinn()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                var obj = Instantiate(attackScriptableObject.attackObjects[1], transform.position, Quaternion.identity, null) as Hiraishinn;
+                obj.dir = 144 * i;
+                Teleport(transform.position + new Vector3(3.3f * Mathf.Cos(obj.dir * Mathf.Deg2Rad),3.3f *Mathf.Sin(obj.dir * Mathf.Deg2Rad) ,0));
+                yield return new WaitForSeconds(0.05f);
+            }
         }
     }
 }
