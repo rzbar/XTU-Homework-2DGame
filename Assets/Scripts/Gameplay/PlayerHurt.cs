@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Platformer.Gameplay
 {
     /// <summary>
-    /// Fired when the player has died.
+    /// Fired when the player was hurt.
     /// </summary>
     /// <typeparam name="PlayerHurt"></typeparam>
     public class PlayerHurt : Simulation.Event<PlayerHurt>

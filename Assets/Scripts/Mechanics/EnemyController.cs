@@ -33,6 +33,7 @@ namespace Platformer.Mechanics
 
         void OnCollisionStay2D(Collision2D collision)
         {
+
             var player = collision.gameObject.GetComponent<PlayerController>();
             if (player != null)
             {

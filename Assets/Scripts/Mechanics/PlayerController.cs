@@ -28,14 +28,15 @@ namespace Platformer.Mechanics
         public float jumpTakeOffSpeed = 7;
 
         public JumpState jumpState = JumpState.Grounded;
+        public FightState fightState = FightState.Normal;
         private bool stopJump => jumpedTimes == maxJumpTime;
         /*internal new*/ public Collider2D collider2d;
         /*internal new*/ public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
 
-        bool jump;
-        bool stopForce;
+        bool jump = false;
+        bool stopForce = true;
         private int jumpedTimes = 0;
         private int maxJumpTime = 2;
         Vector2 move;
@@ -58,17 +59,21 @@ namespace Platformer.Mechanics
         {
             if (controlEnabled)
             {
+                #region move
                 move.x = Input.GetAxis("Horizontal");
 
-                if (Input.GetButtonDown("Jump") && IsGrounded)
-                {
-                    jumpState = JumpState.PrepareToJump;
-                    stopForce = false;
-                }
                 if (Input.GetButtonUp("Jump"))
                 {
                     stopForce = true;
                 }
+                #endregion move
+
+                #region fight
+                if (Input.GetKeyDown(KeyCode.J))
+                {
+                    print(1);
+                }
+                #endregion fight
             }
             else
             {
@@ -111,6 +116,17 @@ namespace Platformer.Mechanics
                     jumpState = JumpState.Grounded;
                     jumpedTimes = 0;
                     break;
+                case JumpState.Grounded:
+                    if (!IsGrounded)
+                    {
+                        jumpState = JumpState.InFlight;
+                    }
+                    if (Input.GetButtonDown("Jump") && IsGrounded)
+                    {
+                        jumpState = JumpState.PrepareToJump;
+                        stopForce = false;
+                    }
+                    break;
             }
         }
 
@@ -125,6 +141,9 @@ namespace Platformer.Mechanics
             {
                 if (velocity.y > 0)
                 {
+                    print("Before:" + velocity.y);
+                    print("Model:" + model.jumpDeceleration);
+                    print("After:" + velocity.y * model.jumpDeceleration);
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
             }
