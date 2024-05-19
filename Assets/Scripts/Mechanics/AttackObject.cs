@@ -17,8 +17,8 @@ namespace Platformer.Mechanics
         public Dictionary<string, Collider2D> attackAreasDict = new Dictionary<string, Collider2D>();
 
         
-        private bool onetime = false;
-        private void Awake()
+        public bool onetime = false;
+        protected virtual void Awake()
         {
             attackAreas = GetComponentsInChildren<Collider2D>();
         }
@@ -41,16 +41,17 @@ namespace Platformer.Mechanics
 
         }
 
-        public void OnCollisionEnter2D(Collision2D collision)
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
+            print(1);
             if (collision.gameObject.CompareTag("Enemy"))
             {
+                print("‘Ï≥……À∫¶¿≤£°");
                 if (onetime)
                 {
                     Destroy(gameObject);
                 }
             }
-            
         }
     }
 }

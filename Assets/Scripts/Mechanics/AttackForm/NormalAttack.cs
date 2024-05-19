@@ -5,6 +5,10 @@ namespace Platformer.Mechanics.AttackForm
 {
     public class NormalAttack : AttackObject
     {
+        private void Start()
+        {
+            print("Õ¶¿Õ²¨");
+        }
         protected override void Update()
         {
             base.Update();
@@ -13,12 +17,10 @@ namespace Platformer.Mechanics.AttackForm
         public override void Handle()
         {
             transform.position += 0.01f*Vector3.right;
-            print("¼¼ÄÜ£¡");
             if(tick > 120)
             {
                 Destroy(gameObject);
             }
         }
     }
-
 }
