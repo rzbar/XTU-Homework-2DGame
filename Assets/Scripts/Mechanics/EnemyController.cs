@@ -22,6 +22,10 @@ namespace Platformer.Mechanics
         internal SpriteRenderer spriteRenderer;
         internal Rigidbody2D body;
 
+        [Header("血量相关")]
+        public float maxHeath;
+        public float curHeath;
+
         public Bounds Bounds => _collider.bounds;
 
         protected virtual void Awake()
