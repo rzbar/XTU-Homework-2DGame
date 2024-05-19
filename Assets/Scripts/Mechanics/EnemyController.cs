@@ -19,7 +19,8 @@ namespace Platformer.Mechanics
         internal AnimationController control;
         internal Collider2D _collider;
         internal AudioSource _audio;
-        SpriteRenderer spriteRenderer;
+        internal SpriteRenderer spriteRenderer;
+        internal Rigidbody2D body;
 
         public Bounds Bounds => _collider.bounds;
 
@@ -29,9 +30,10 @@ namespace Platformer.Mechanics
             _collider = GetComponent<Collider2D>();
             _audio = GetComponent<AudioSource>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+            body = GetComponent<Rigidbody2D>();
         }
 
-        void OnCollisionStay2D(Collision2D collision)
+        protected virtual void OnCollisionStay2D(Collision2D collision)
         {
             var player = collision.gameObject.GetComponent<PlayerController>();
             if (player != null)
@@ -42,7 +44,7 @@ namespace Platformer.Mechanics
             }
         }
 
-        void Update()
+        protected virtual void Update()
         {
             if (path != null)
             {

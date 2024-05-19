@@ -12,6 +12,7 @@ namespace Platformer.Mechanics
         /// </summary>
         public Vector2 startPosition, endPosition;
 
+
         /// <summary>
         /// Create a Mover instance which is used to move an entity along the path at a certain speed.
         /// </summary>
