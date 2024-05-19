@@ -43,8 +43,24 @@ namespace Platformer.Mechanics
                 ev.player = player;
                 ev.enemy = this;
             }
-            AttackObject attact=collision.gameObject.GetComponent<AttackObject>();
-            if(attact != null)
+            
+        }
+
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
+        {
+            AttackObject attact = null;
+            foreach(var com in collision.gameObject.GetComponents<Component>())
+            {
+                foreach(var com1 in com.gameObject.GetComponentsInParent<Component>())
+                {
+                    if(com1 is AttackObject)
+                    {
+                        attact = (AttackObject)com1;
+                    }
+                }
+                
+            }
+            if (attact != null)
             {
                 var ev = Schedule<EnemyHurt>();
                 ev.enemy = this;

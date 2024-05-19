@@ -43,7 +43,7 @@ namespace Platformer.Mechanics
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            print(1);
+            
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 print("‘Ï≥……À∫¶¿≤£°");

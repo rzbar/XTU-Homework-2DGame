@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tick: 0
-  damage: 2
+  damage: 1
   attackAreas: []
   onetime: 0
 --- !u!50 &1936843359210891953
