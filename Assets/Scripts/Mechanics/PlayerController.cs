@@ -5,6 +5,8 @@ using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using Platformer.Mechanics.AttackForm;
+using UnityEditor;
 
 namespace Platformer.Mechanics
 {
@@ -14,6 +16,7 @@ namespace Platformer.Mechanics
     /// </summary>
     public class PlayerController : KinematicObject
     {
+       
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
@@ -45,8 +48,12 @@ namespace Platformer.Mechanics
         internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
-        public Bounds Bounds => collider2d.bounds;
+        private float cooldown = 10f;
+        private float defaultCd = 10f;
+        private float motifyCd = 1f;
 
+        public Bounds Bounds => collider2d.bounds;
+        public int left => (spriteRenderer.flipX?-1:1);
         void Awake()
         {
             health = GetComponent<Health>();
@@ -58,6 +65,7 @@ namespace Platformer.Mechanics
 
         protected override void Update()
         {
+            cooldown = Mathf.Clamp(Time.deltaTime - Time.deltaTime,0,defaultCd * motifyCd);
             if (controlEnabled)
             {
                 #region move
@@ -70,9 +78,16 @@ namespace Platformer.Mechanics
                 #endregion move
 
                 #region fight
-                if (Input.GetKeyDown(KeyCode.J))
+                if (Input.GetKeyDown(KeyCode.J) && cooldown<=0)
                 {
-                    Instantiate(attackScriptableObject.attackObjects[0],transform.position,Quaternion.identity,null);
+                    var obj = Instantiate(attackScriptableObject.attackObjects[0],transform.position,Quaternion.identity,null);
+                    cooldown = defaultCd * motifyCd;
+                    //obj.transform.localScale = new Vector3(move.x>0?1:-1, 1, 1);
+                }
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    StartCoroutine(Hiraishinn());
+                    cooldown = defaultCd * motifyCd;
                 }
                 #endregion fight
             }
@@ -178,6 +193,17 @@ namespace Platformer.Mechanics
         {
             Hurt,
             Normal,
+        }
+
+        IEnumerator Hiraishinn()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                var obj = Instantiate(attackScriptableObject.attackObjects[1], transform.position, Quaternion.identity, null) as Hiraishinn;
+                obj.dir = 144 * i;
+                Teleport(transform.position + new Vector3(3.3f * Mathf.Cos(obj.dir * Mathf.Deg2Rad),3.3f *Mathf.Sin(obj.dir * Mathf.Deg2Rad) ,0));
+                yield return new WaitForSeconds(0.05f);
+            }
         }
     }
 }

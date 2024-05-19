@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Platformer.Mechanics.AttackForm
 {
-    public class NormalAttack : AttackObject
+    public class Hiraishinn : AttackObject
     {
-        private int dir;
+        public float dir;
         private void Start()
         {
-            print("Õ¶¿Õ²¨");
-            dir = model.player.left;
+            print("·ÉÀ×Éñ");
+            transform.localEulerAngles = new Vector3(0, 0, dir);
         }
         protected override void Handle()
         {
-            transform.localPosition += 0.1f*dir*Vector3.right;
-            if(tick > 30)
+            if (tick > 10)
             {
                 Destroy(gameObject);
             }

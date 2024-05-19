@@ -34,9 +34,10 @@ namespace Platformer.Mechanics
         protected virtual void Update()
         {
             tick++;
+            Handle();
         }
 
-        public virtual void Handle()
+        protected virtual void Handle()
         {
 
         }
