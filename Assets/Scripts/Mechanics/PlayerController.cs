@@ -141,9 +141,7 @@ namespace Platformer.Mechanics
             {
                 if (velocity.y > 0)
                 {
-                    print("Before:" + velocity.y);
-                    print("Model:" + model.jumpDeceleration);
-                    print("After:" + velocity.y * model.jumpDeceleration);
+                    
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
             }
