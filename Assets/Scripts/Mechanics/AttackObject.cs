@@ -8,13 +8,15 @@ namespace Platformer.Mechanics
 {
     public class AttackObject : MonoBehaviour
     {
+        [SerializeField]
+        protected int tick = 0;
         protected readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
         public float damage;
         public Collider2D[] attackAreas;
 
         public Dictionary<string, Collider2D> attackAreasDict = new Dictionary<string, Collider2D>();
 
-        protected int tick = 0;
+        
         private bool onetime = false;
         private void Awake()
         {
@@ -29,10 +31,9 @@ namespace Platformer.Mechanics
             }
             
         }
-        public void Update()
+        protected virtual void Update()
         {
             tick++;
-            Handle();
         }
 
         public virtual void Handle()
@@ -46,7 +47,7 @@ namespace Platformer.Mechanics
             {
                 if (onetime)
                 {
-                    Destroy(this);
+                    Destroy(gameObject);
                 }
             }
             

@@ -72,7 +72,7 @@ namespace Platformer.Mechanics
                 #region fight
                 if (Input.GetKeyDown(KeyCode.J))
                 {
-                    Instantiate(attackScriptableObject.attackObjects[0]);
+                    Instantiate(attackScriptableObject.attackObjects[0],transform.position,Quaternion.identity,null);
                 }
                 #endregion fight
             }
