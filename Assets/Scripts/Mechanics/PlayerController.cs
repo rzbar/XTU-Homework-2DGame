@@ -7,6 +7,7 @@ using Platformer.Model;
 using Platformer.Core;
 using Platformer.Mechanics.AttackForm;
 using UnityEditor;
+using Platformer.Mechanics.Skill;
 
 namespace Platformer.Mechanics
 {
@@ -21,6 +22,7 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
         public AttackScriptableObject attackScriptableObject;
+        public SkillManager skillManager;
         public bool canHurt;
 
         /// <summary>
@@ -49,8 +51,8 @@ namespace Platformer.Mechanics
         internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
-        private float cooldown = 10f;
-        private float defaultCd = 10f;
+        private float cooldown = 0.5f;
+        private float defaultCd = 0.5f;
         private float motifyCd = 1f;
 
         public Bounds Bounds => collider2d.bounds;
@@ -62,11 +64,12 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            skillManager = GetComponent<SkillManager>();
         }
 
         protected override void Update()
         {
-            cooldown = Mathf.Clamp(Time.deltaTime - Time.deltaTime,0,defaultCd * motifyCd);
+            cooldown = Mathf.Clamp(cooldown - Time.deltaTime,0,defaultCd * motifyCd);
             if (controlEnabled)
             {
                 #region move
@@ -79,16 +82,37 @@ namespace Platformer.Mechanics
                 #endregion move
 
                 #region fight
+                //普攻槽位
                 if (Input.GetKeyDown(KeyCode.J) && cooldown<=0)
                 {
                     var obj = Instantiate(attackScriptableObject.attackObjects[0],transform.position,Quaternion.identity,null);
                     cooldown = defaultCd * motifyCd;
                     //obj.transform.localScale = new Vector3(move.x>0?1:-1, 1, 1);
                 }
-                if (Input.GetKeyDown(KeyCode.K))
+                if (Input.GetKeyDown(KeyCode.U))
                 {
-                    StartCoroutine(Hiraishinn());
-                    cooldown = defaultCd * motifyCd;
+                    if (skillManager.emitters[0] != null && skillManager.emitters[0].currentCd <= 0)
+                    {
+                        skillManager.emitters[0].emitter.Emit();
+                        skillManager.RenewCD(0);
+                    }
+                    
+                }
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    if (skillManager.emitters[1] != null && skillManager.emitters[0].currentCd <= 0)
+                    {
+                        skillManager.emitters[1].emitter.Emit();
+                        skillManager.RenewCD(1);
+                    }
+                }
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    if (skillManager.emitters[2] != null && skillManager.emitters[0].currentCd <= 0)
+                    {
+                        skillManager.emitters[2].emitter.Emit();
+                        skillManager.RenewCD(2);
+                    }
                 }
                 #endregion fight
             }
@@ -195,7 +219,6 @@ namespace Platformer.Mechanics
             Hurt,
             Normal,
             Attack,
-            WD,
         }
 
         IEnumerator Hiraishinn()
