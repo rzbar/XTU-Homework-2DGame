@@ -8,9 +8,17 @@ namespace Platformer.Mechanics.AttackForm
         private int dir;
         private void Start()
         {
-            
             dir = model.player.left;
         }
-        
+
+        protected override void Handle()
+        {
+            transform.position += dir * new Vector3(0.1f, 0, 0);
+            if(tick > 30)
+            {
+                Destroy(gameObject);
+            }
+        }
+
     }
 }
