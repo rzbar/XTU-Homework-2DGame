@@ -233,6 +233,27 @@ namespace Platformer.Mechanics
             }
         }
 
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            AttackObject attact = null;
+            foreach (var com in collision.gameObject.GetComponents<Component>())
+            {
+                foreach (var com1 in com.gameObject.GetComponentsInParent<Component>())
+                {
+                    if (com1 is AttackObject)
+                    {
+                        attact = (AttackObject)com1;
+                    }
+                }
+
+            }
+            if (attact != null && (attact.type & 1) == 1)
+            {
+                var ev = Schedule<PlayerHurt>();
+                ev.dmg = attact.damage;
+            }
+        }
+
         void UpdataRenderer()
         {
             if(invincibility > 0)

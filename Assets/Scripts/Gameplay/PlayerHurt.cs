@@ -13,13 +13,14 @@ namespace Platformer.Gameplay
     public class PlayerHurt : Simulation.Event<PlayerHurt>
     {
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        public float dmg = 1f;
 
         public override void Execute()
         {
             var player = model.player;
             if (player.health.IsAlive)
             {
-                player.health.Decrement(1f);
+                player.health.Decrement(dmg);
                 //model.virtualCamera.m_Follow = null;
                 //model.virtualCamera.m_LookAt = null;
                 // player.collider.enabled = false;
