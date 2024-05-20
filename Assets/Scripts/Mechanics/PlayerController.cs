@@ -51,12 +51,15 @@ namespace Platformer.Mechanics
         internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
-        private float cooldown = 0.5f;
-        private float defaultCd = 0.5f;
-        private float motifyCd = 1f;
+        [SerializeField]
+        private int invincibility = 0;
+
 
         public Bounds Bounds => collider2d.bounds;
         public int left => (spriteRenderer.flipX?-1:1);
+
+        public int Invincibility { get => invincibility; set => invincibility = value; }
+
         void Awake()
         {
             health = GetComponent<Health>();
@@ -69,7 +72,7 @@ namespace Platformer.Mechanics
 
         protected override void Update()
         {
-            cooldown = Mathf.Clamp(cooldown - Time.deltaTime,0,defaultCd * motifyCd);
+            UpdataRenderer();
             if (controlEnabled)
             {
                 #region move
@@ -83,15 +86,13 @@ namespace Platformer.Mechanics
 
                 #region fight
                 //普攻槽位
-                if (Input.GetKeyDown(KeyCode.J) && cooldown<=0)
+                if (Input.GetKeyDown(KeyCode.J))
                 {
                     var obj = Instantiate(attackScriptableObject.attackObjects[0],transform.position,Quaternion.identity,null);
-                    cooldown = defaultCd * motifyCd;
-                    //obj.transform.localScale = new Vector3(move.x>0?1:-1, 1, 1);
                 }
                 if (Input.GetKeyDown(KeyCode.U))
                 {
-                    if (skillManager.emitters[0] != null && skillManager.emitters[0].currentCd <= 0)
+                    if (skillManager.emitters[0].emitter != null && skillManager.emitters[0].currentCd <= 0)
                     {
                         skillManager.emitters[0].emitter.Emit();
                         skillManager.RenewCD(0);
@@ -100,7 +101,7 @@ namespace Platformer.Mechanics
                 }
                 if (Input.GetKeyDown(KeyCode.I))
                 {
-                    if (skillManager.emitters[1] != null && skillManager.emitters[0].currentCd <= 0)
+                    if (skillManager.emitters[1].emitter != null && skillManager.emitters[1].currentCd <= 0)
                     {
                         skillManager.emitters[1].emitter.Emit();
                         skillManager.RenewCD(1);
@@ -108,7 +109,7 @@ namespace Platformer.Mechanics
                 }
                 if (Input.GetKeyDown(KeyCode.O))
                 {
-                    if (skillManager.emitters[2] != null && skillManager.emitters[0].currentCd <= 0)
+                    if (skillManager.emitters[2].emitter != null && skillManager.emitters[2].currentCd <= 0)
                     {
                         skillManager.emitters[2].emitter.Emit();
                         skillManager.RenewCD(2);
@@ -229,6 +230,18 @@ namespace Platformer.Mechanics
                 obj.dir = 144 * i;
                 Teleport(transform.position + new Vector3(3.3f * Mathf.Cos(obj.dir * Mathf.Deg2Rad),3.3f *Mathf.Sin(obj.dir * Mathf.Deg2Rad) ,0));
                 yield return new WaitForSeconds(0.05f);
+            }
+        }
+
+        void UpdataRenderer()
+        {
+            if(invincibility > 0)
+            {
+                spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+            }
+            else
+            {
+                spriteRenderer.color = new Color(1, 1, 1, 1f);
             }
         }
     }

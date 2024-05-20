@@ -15,6 +15,7 @@ namespace Platformer.Mechanics.Skill
         {
             //TODO
         }
+
     }
 }
 

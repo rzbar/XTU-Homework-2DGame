@@ -10,6 +10,14 @@ namespace Platformer.Mechanics.Skill
         public override void Emit()
         {
             var obj = Instantiate(model.attackScriptableObject.attackObjects[0], model.player.transform.position, Quaternion.identity, null);
+            StartCoroutine(Invincibility());
+        }
+
+        IEnumerator Invincibility()
+        {
+            model.player.Invincibility++;
+            yield return new WaitForSeconds(60*Time.deltaTime);
+            model.player.Invincibility--;
         }
     }
 }

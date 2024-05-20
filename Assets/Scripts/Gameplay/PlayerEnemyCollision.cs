@@ -47,8 +47,10 @@ namespace Platformer.Gameplay
             }
             else
             {
-                
-                Schedule<PlayerHurt>();
+                if (player.Invincibility == 0)
+                {
+                    Schedule<PlayerHurt>();
+                }
             }
         }
     }
