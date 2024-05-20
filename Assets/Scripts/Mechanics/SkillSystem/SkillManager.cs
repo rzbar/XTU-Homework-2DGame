@@ -31,6 +31,11 @@ namespace Platformer.Mechanics.Skill
             emitters[id].currentCd = emitters[id].cd;
         }
 
+        public void ClearCD(int id)
+        {
+            emitters[id].currentCd = 0;
+        }
+
         public void SetSkill(int where,SkillInfo what)
         {
 
