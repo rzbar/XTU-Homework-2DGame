@@ -307,7 +307,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tick: 0
-  damage: 0
+  damage: 3
+  type: 7
   attackAreas: []
   onetime: 0
 --- !u!1 &162364

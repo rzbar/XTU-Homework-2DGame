@@ -60,7 +60,7 @@ namespace Platformer.Mechanics
                 }
                 
             }
-            if (attact != null)
+            if (attact != null&&((attact.type>>1)&1)==1)
             {
                 var ev = Schedule<EnemyHurt>();
                 ev.enemy = this;

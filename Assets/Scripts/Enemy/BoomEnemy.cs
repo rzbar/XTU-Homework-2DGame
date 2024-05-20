@@ -1,3 +1,4 @@
+using Platformer.Mechanics.AttackForm;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -26,6 +27,20 @@ namespace Platformer.Mechanics
                 StartCoroutine(Boom());
             }
             
+        }
+
+        protected override void OnCollisionStay2D(Collision2D collision)
+        {
+            
+        }
+
+        protected override void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.GetComponent<BoomAttack>()!=null)
+            {
+                Health health = transform.GetComponent<Health>();
+                health.Decrement(1f);
+            }
         }
 
         IEnumerator Boom()

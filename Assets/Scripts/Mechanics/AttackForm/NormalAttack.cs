@@ -8,7 +8,7 @@ namespace Platformer.Mechanics.AttackForm
         private int dir;
         private void Start()
         {
-            print("Õ¶¿Õ²¨");
+            
             dir = model.player.left;
         }
         
