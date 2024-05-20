@@ -12,6 +12,11 @@ namespace Platformer.Mechanics
         protected int tick = 0;
         protected readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
         public float damage;
+        /// <summary>
+        /// 1:对玩家造成伤害
+        /// 2:对怪物造成伤害
+        /// </summary>
+        public int type;
         public Collider2D[] attackAreas;
 
         public Dictionary<string, Collider2D> attackAreasDict = new Dictionary<string, Collider2D>();
@@ -45,9 +50,15 @@ namespace Platformer.Mechanics
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
             
-            if (collision.gameObject.CompareTag("Enemy"))
+            if (collision.gameObject.CompareTag("Enemy") && (type >> 1 & 1) == 1)
             {
-                print("造成伤害啦！");
+                if (onetime)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            if (collision.gameObject.CompareTag("Player") && (type & 1) == 1)
+            {
                 if (onetime)
                 {
                     Destroy(gameObject);
