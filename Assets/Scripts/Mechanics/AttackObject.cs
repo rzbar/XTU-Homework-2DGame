@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Platformer.Mechanics
 {
-    public class AttackObject : MonoBehaviour
+    public abstract class AttackObject : MonoBehaviour
     {
         [SerializeField]
         protected int tick = 0;
@@ -16,7 +16,7 @@ namespace Platformer.Mechanics
         /// 1:对玩家造成伤害
         /// 2:对怪物造成伤害
         /// </summary>
-        public int type;
+        public int type = 2;
         public Collider2D[] attackAreas;
 
         public Dictionary<string, Collider2D> attackAreasDict = new Dictionary<string, Collider2D>();
