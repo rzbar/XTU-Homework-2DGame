@@ -10,15 +10,39 @@ namespace Platformer.Mechanics
     {
         public GameObject boomEffect;
         public float boomArea;
+        private bool isBoomed;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            isBoomed = false;
+        }
         protected override void Update()
         {
             base.Update();
-            if (CanBoom())
+            if (CanBoom()&&!isBoomed)
             {
-                var boom=Instantiate(boomEffect);
-                boom.transform.position=this.transform.position;
-                Destroy(boom, 2);
+                isBoomed = true;
+                StartCoroutine(Boom());
             }
+            
+        }
+
+        IEnumerator Boom()
+        {
+            spriteRenderer= this.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+            float col = 1;
+            while (col > 0)
+            {
+                col -= 0.1f;
+                spriteRenderer.color=new Color(col, col, col, 1);
+                yield return new WaitForSeconds(0.2f);
+            }
+            var boom = Instantiate(boomEffect);
+            boom.transform.position = this.transform.position;
+            Destroy(boom, 2);
+            
         }
         internal bool CanBoom()
         {

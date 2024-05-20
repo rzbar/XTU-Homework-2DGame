@@ -11,13 +11,6 @@ namespace Platformer.Mechanics.AttackForm
             print("Õ¶¿Õ²¨");
             dir = model.player.left;
         }
-        protected override void Handle()
-        {
-            transform.localPosition += 0.1f*dir*Vector3.right;
-            if(tick > 30)
-            {
-                Destroy(gameObject);
-            }
-        }
+        
     }
 }

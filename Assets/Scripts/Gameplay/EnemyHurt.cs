@@ -11,7 +11,6 @@ namespace Platformer.Gameplay
         Health health;
         public override void Execute()
         {
-            Debug.Log("我被打力");
             health=enemy.GetComponent<Health>();
             health.Decrement(hurtNum);
         }
