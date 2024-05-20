@@ -21,7 +21,6 @@ namespace Platformer.Mechanics
 
         public Dictionary<string, Collider2D> attackAreasDict = new Dictionary<string, Collider2D>();
 
-        
         public bool onetime = false;
         protected virtual void Awake()
         {
