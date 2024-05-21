@@ -16,6 +16,18 @@ namespace Platformer.Mechanics.Skill
             public float cd;
             public float currentCd;
             public SkillEmitter emitter;
+
+            public void EmitSkill()
+            {
+                if (currentCd <= 0)
+                {
+                    if (emitter != null)
+                    {
+                        currentCd = cd;
+                        emitter.Emit();
+                    }
+                }
+            }
         }
 
         private void Update()
