@@ -31,7 +31,6 @@ public class Boss0 : FollowEnemy
             {
                 Vector3 targetPos = new Vector3(player.transform.position.x, jumpHeight, transform.position.z);
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, jumpSpeed * Time.deltaTime);
-                skillManager.emitters[0].EmitSkill();
 
             }
         }

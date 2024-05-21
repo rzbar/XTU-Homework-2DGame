@@ -15,6 +15,3 @@ MonoBehaviour:
   attackObjects:
   - {fileID: -2352982581722389487, guid: 8c42d3ea92422b44fbe9da241ca4442f, type: 3}
   - {fileID: 2017774185564958927, guid: 79362cbc50e408245ab7c8d8edfbb9d1, type: 3}
-  - {fileID: 2017774185564958927, guid: 79362cbc50e408245ab7c8d8edfbb9d1, type: 3}
-  - {fileID: 2017774185564958927, guid: 79362cbc50e408245ab7c8d8edfbb9d1, type: 3}
-  - {fileID: 2017774185564958927, guid: 79362cbc50e408245ab7c8d8edfbb9d1, type: 3}
