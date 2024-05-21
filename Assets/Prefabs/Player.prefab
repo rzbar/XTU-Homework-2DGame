@@ -17,8 +17,7 @@ GameObject:
   - component: {fileID: 6082575806313374961}
   - component: {fileID: 1824045667}
   - component: {fileID: 1503235583208530512}
-  - component: {fileID: 6964982428163878414}
-  - component: {fileID: 8887105278734342608}
+  - component: {fileID: 9087234527154254536}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -363,20 +362,7 @@ CircleCollider2D:
   m_Offset: {x: -0.06161946, y: -0.13204175}
   serializedVersion: 2
   m_Radius: 0.31723124
---- !u!114 &6964982428163878414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208144871472054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8534e17a0f90604c9afd4f5c73d829f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Id: 2cedde77-9eec-414f-a172-5c4b3c8e2891
---- !u!114 &8887105278734342608
+--- !u!114 &9087234527154254536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -391,12 +377,12 @@ MonoBehaviour:
   emitters:
   - id: 0
     name: 
-    cd: 0
+    cd: 2
     currentCd: 0
     emitter: {fileID: 0}
   - id: 0
     name: 
-    cd: 0
+    cd: 3
     currentCd: 0
     emitter: {fileID: 0}
   - id: 0

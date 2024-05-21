@@ -23,7 +23,6 @@ namespace Platformer.Mechanics
         public AudioClip ouchAudio;
         public AttackScriptableObject attackScriptableObject;
         public SkillManager skillManager;
-        public bool canHurt;
 
         /// <summary>
         /// Max horizontal speed of the player.
@@ -209,16 +208,6 @@ namespace Platformer.Mechanics
             Attack,
         }
 
-        IEnumerator Hiraishinn()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                var obj = Instantiate(attackScriptableObject.attackObjects[1], transform.position, Quaternion.identity, null) as Hiraishinn;
-                obj.dir = 144 * i;
-                Teleport(transform.position + new Vector3(3.3f * Mathf.Cos(obj.dir * Mathf.Deg2Rad),3.3f *Mathf.Sin(obj.dir * Mathf.Deg2Rad) ,0));
-                yield return new WaitForSeconds(0.05f);
-            }
-        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
