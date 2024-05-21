@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 6082575806313374961}
   - component: {fileID: 1824045667}
   - component: {fileID: 1503235583208530512}
+  - component: {fileID: 6964982428163878414}
+  - component: {fileID: 8887105278734342608}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -57,13 +59,19 @@ MonoBehaviour:
   jumpAudio: {fileID: 8300000, guid: 67975c08d56ceb147bad38572d805aa8, type: 3}
   respawnAudio: {fileID: 8300000, guid: e18959d46b63f3c4c8cc020a433cf848, type: 3}
   ouchAudio: {fileID: 8300000, guid: 6c05149e5a2fba64ba172e25a61074b7, type: 3}
+  attackScriptableObject: {fileID: 11400000, guid: 2366d7d8ad9cd0045a38909307205436,
+    type: 2}
+  skillManager: {fileID: 0}
+  canHurt: 0
   maxSpeed: 3
   jumpTakeOffSpeed: 7
   jumpState: 0
+  fightState: 1
   collider2d: {fileID: 0}
   audioSource: {fileID: 0}
   health: {fileID: 0}
   controlEnabled: 1
+  invincibility: 0
 --- !u!212 &212064061491315838
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -272,8 +280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffad43bb006db4856a9c527b89b48db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1
+  maxHP: 2
   currentHP: 0
+  hpBar: {fileID: 0}
 --- !u!61 &1824045667
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -354,3 +363,44 @@ CircleCollider2D:
   m_Offset: {x: -0.06161946, y: -0.13204175}
   serializedVersion: 2
   m_Radius: 0.31723124
+--- !u!114 &6964982428163878414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208144871472054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8534e17a0f90604c9afd4f5c73d829f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Id: 2cedde77-9eec-414f-a172-5c4b3c8e2891
+--- !u!114 &8887105278734342608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208144871472054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf403cb0a3451542b7794d6d4abae0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitters:
+  - id: 0
+    name: 
+    cd: 0
+    currentCd: 0
+    emitter: {fileID: 0}
+  - id: 0
+    name: 
+    cd: 0
+    currentCd: 0
+    emitter: {fileID: 0}
+  - id: 0
+    name: 
+    cd: 0
+    currentCd: 0
+    emitter: {fileID: 0}
