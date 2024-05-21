@@ -11,28 +11,33 @@ namespace Platformer.Mechanics
         public float distance;
         public PlayerController player;
         public float followSpeed;
+        public bool isStop;
         #endregion
         protected override void Awake()
         {
             player = GameObject.Find("Player").GetComponent<PlayerController>();
+            isStop = false;
             base.Awake();
         }
         protected override void Update()
         {
-            if (isFindPlayer())
+            if (!isStop)
             {
-                control.move.x = Mathf.Clamp(player.transform.localPosition.x - transform.localPosition.x, -followSpeed, followSpeed);
-            }
-            else
-            {
-                if (path != null)
+                if (isFindPlayer())
                 {
-                    mover = path.CreateMover(control.maxSpeed * 0.5f);
-                    control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+                    control.move.x = Mathf.Clamp(player.transform.localPosition.x - transform.localPosition.x, -followSpeed, followSpeed);
+                }
+                else
+                {
+                    if (path != null)
+                    {
+                        mover = path.CreateMover(control.maxSpeed * 0.5f);
+                        control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+                    }
                 }
             }
         }
-
+        
         internal bool isFindPlayer()
         {
             return Vector2.Distance(this.transform.position, player.transform.position) < distance;

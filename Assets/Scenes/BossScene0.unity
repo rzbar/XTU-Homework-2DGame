@@ -4065,7 +4065,7 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
   m_UseDelaunayMesh: 0
---- !u!1001 &1015132693
+--- !u!1001 &1162947870
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4079,11 +4079,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4520396350849616, guid: 7d60c822c3f1b408ea7a00ecdb5e047a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.33
+      value: -6.9
       objectReference: {fileID: 0}
     - target: {fileID: 4520396350849616, guid: 7d60c822c3f1b408ea7a00ecdb5e047a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9
+      value: -1.91
       objectReference: {fileID: 0}
     - target: {fileID: 4520396350849616, guid: 7d60c822c3f1b408ea7a00ecdb5e047a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4918,7 +4918,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf403cb0a3451542b7794d6d4abae0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emitters: []
+  emitters:
+  - id: 0
+    name: 
+    cd: 0
+    currentCd: 0
+    emitter: {fileID: 0}
+  - id: 0
+    name: 
+    cd: 0
+    currentCd: 0
+    emitter: {fileID: 0}
+  - id: 0
+    name: 
+    cd: 0
+    currentCd: 0
+    emitter: {fileID: 0}
 --- !u!114 &9091947190644313793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4944,7 +4959,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 287928689}
   - {fileID: 286620666}
-  - {fileID: 1015132693}
   - {fileID: 8992700722140842129}
   - {fileID: 1427807902}
   - {fileID: 1584435881}
+  - {fileID: 1162947870}
