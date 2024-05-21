@@ -9,6 +9,7 @@ namespace Platformer.Mechanics.Item
     public class Weapon : MonoBehaviour
     {
         private SkillEmitter skillEmitter;
+        public string weaponName = "Weapon";
         void Start()
         {
             skillEmitter = GetComponent<SkillEmitter>();

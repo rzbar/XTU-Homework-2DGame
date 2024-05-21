@@ -223,7 +223,7 @@ namespace Platformer.Mechanics
                 }
 
             }
-            if (attact != null && (attact.type & 1) == 1)
+            if (attact != null && (attact.type & 1) == 1 && Invincibility==0)
             {
                 var ev = Schedule<PlayerHurt>();
                 ev.dmg = attact.damage;
