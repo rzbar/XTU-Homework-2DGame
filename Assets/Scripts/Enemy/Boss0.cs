@@ -11,7 +11,8 @@ public class Boss0 : FollowEnemy
     public float jumpHeight;
     public float jumpSpeed;
     public SkillManager skillManager;
-
+    public GameObject waringArea;
+    float timer = 0;
     protected override void Awake()
     {
         base.Awake();
@@ -19,24 +20,32 @@ public class Boss0 : FollowEnemy
     }
     protected override void Update()
     {
-        float timer = 0;
         timer += Time.deltaTime;
-        fromPlayer = Vector2.Distance(this.transform.position, player.transform.position);
+        print(transform.position.x);
+
+        fromPlayer = Vector2.Distance(transform.position, player.transform.position);
         if(fromPlayer > distance && timer>waitTime)
         {
-            this.transform.position = player.transform.position;
-            Vector3 myTarget = new Vector3(player.transform.position.x, jumpHeight, transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, myTarget, jumpSpeed * Time.deltaTime);
-            if(player.transform.position.x == this.transform.position.x)
-            {
-                Vector3 targetPos = new Vector3(player.transform.position.x, jumpHeight, transform.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, jumpSpeed * Time.deltaTime);
-
-            }
+            timer = 0;
+            //StartCoroutine(FallDown());
+            //transform.position = new Vector3();
         }
-
-
         base.Update();
+
     }
-    
+
+    //IEnumerator FallDown()
+    //{
+    //    control.animator.SetTrigger("Jump!");
+    //    yield return new WaitForSeconds(2);
+    //    this.transform.position=new Vector3(player.transform.position.x,8,transform.position.z);
+    //    while (transform.position.y > player.transform.position.y)
+    //    {
+            
+    //        transform.position=new Vector3(transform.position.x,transform.position.y-0.04f,transform.position.z);
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //    //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, jumpSpeed * Time.deltaTime);
+    //    timer = 0;
+    //}
 }
