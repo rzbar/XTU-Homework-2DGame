@@ -92,28 +92,15 @@ namespace Platformer.Mechanics
                 }
                 if (Input.GetKeyDown(KeyCode.U))
                 {
-                    if (skillManager.emitters[0].emitter != null && skillManager.emitters[0].currentCd <= 0)
-                    {
-                        skillManager.emitters[0].emitter.Emit();
-                        skillManager.RenewCD(0);
-                    }
-                    
+                    skillManager.emitters[0].EmitSkill();
                 }
                 if (Input.GetKeyDown(KeyCode.I))
                 {
-                    if (skillManager.emitters[1].emitter != null && skillManager.emitters[1].currentCd <= 0)
-                    {
-                        skillManager.emitters[1].emitter.Emit();
-                        skillManager.RenewCD(1);
-                    }
+                    skillManager.emitters[1].EmitSkill();
                 }
                 if (Input.GetKeyDown(KeyCode.O))
                 {
-                    if (skillManager.emitters[2].emitter != null && skillManager.emitters[2].currentCd <= 0)
-                    {
-                        skillManager.emitters[2].emitter.Emit();
-                        skillManager.RenewCD(2);
-                    }
+                    skillManager.emitters[2].EmitSkill();
                 }
                 #endregion fight
             }
