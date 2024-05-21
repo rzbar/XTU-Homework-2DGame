@@ -6,5 +6,4 @@ public class ItemOnRoad : MonoBehaviour
 {
     public Item thisItem;
     public Inventroy playerInventroy;
-    }
 }
