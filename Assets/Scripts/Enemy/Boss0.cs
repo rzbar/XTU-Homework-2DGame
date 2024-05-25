@@ -75,19 +75,18 @@ public class Boss0 : FollowEnemy
         rushEffect.SetActive(true);
         if (forword.x < 0)
         {
-            
             float time = 1f;
             while(time > 0)
             {
                 warn.transform.localScale = new Vector3(1 - time, 1 - time, 1);
                 time -= 0.01f;
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
             rushEffect.SetActive(false);
             while(transform.position.x> item.transform.position.x - rushDis)
             {
                 transform.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
         }
         else
@@ -98,13 +97,13 @@ public class Boss0 : FollowEnemy
             {
                 warn.transform.localScale = new Vector3(1 - time, 1 - time, 1);
                 time -= 0.01f;
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
             rushEffect.SetActive(false);
             while (transform.position.x < item.transform.position.x + rushDis)
             {
                 transform.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
         }
 
