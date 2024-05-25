@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352eb58b0c607ad4fbc172a3b5d6e5b0, type: 3}
+  m_Name: Kubu
+  m_EditorClassIdentifier: 
+  itemName: "\u82E6\u65E0"
+  itemImage: {fileID: 21300000, guid: a0e4c89cf616f5343b56ffcaa2f4c74b, type: 3}
+  itemInfo: 
+  skillInfo:
+    cd: 3
+    skillEmitter: {fileID: 1158982676277522038, guid: 185b602d1068e304492aadbff8a9491e,
+      type: 3}

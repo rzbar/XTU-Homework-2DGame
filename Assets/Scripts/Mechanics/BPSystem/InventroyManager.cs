@@ -40,6 +40,10 @@ namespace Platformer.Mechanics.BPSystem
 
         private void UpdateItem(int id, Item what)
         {
+            if(what == null)
+            {
+                return;
+            }
             var obj = slotGrid.transform.GetChild(id).gameObject.transform.GetChild(0);
             obj.GetComponent<Image>().sprite = what.itemImage;
             myBag.itemList[id] = what;

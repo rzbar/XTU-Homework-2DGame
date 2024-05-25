@@ -246,8 +246,9 @@ namespace Platformer.Mechanics
 
         void UpdateSkillList()
         {
-            
-            skillManager.emitters[0].emitter = InventoryManager.instance.GetItem(0).skillInfo.skillEmitter;
+            skillManager.emitters[0].emitter ??= InventoryManager.instance.GetItem(0)?.skillInfo.skillEmitter;
+            skillManager.emitters[1].emitter ??= InventoryManager.instance.GetItem(1)?.skillInfo.skillEmitter;
+            skillManager.emitters[2].emitter ??= InventoryManager.instance.GetItem(2)?.skillInfo.skillEmitter;
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Platformer.Mechanics.AttackForm
         public float dir;
         private void Start()
         {
-            print("·ÉÀ×Éñ");
             transform.localEulerAngles = new Vector3(0, 0, dir);
         }
         protected override void Handle()
