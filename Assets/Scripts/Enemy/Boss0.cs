@@ -11,7 +11,10 @@ public class Boss0 : FollowEnemy
     public float jumpHeight;
     public float jumpSpeed;
     public SkillManager skillManager;
-
+    public GameObject waringArea;
+    public GameObject rushAtea;
+    public float rushDis;
+    float timer = 0;
     protected override void Awake()
     {
         base.Awake();
@@ -19,24 +22,66 @@ public class Boss0 : FollowEnemy
     }
     protected override void Update()
     {
-        float timer = 0;
         timer += Time.deltaTime;
-        fromPlayer = Vector2.Distance(this.transform.position, player.transform.position);
-        if(fromPlayer > distance && timer>waitTime)
-        {
-            this.transform.position = player.transform.position;
-            Vector3 myTarget = new Vector3(player.transform.position.x, jumpHeight, transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, myTarget, jumpSpeed * Time.deltaTime);
-            if(player.transform.position.x == this.transform.position.x)
+        fromPlayer = Vector2.Distance(transform.position, player.transform.position);
+        if (timer > waitTime) {
+            if (fromPlayer > distance)
             {
-                Vector3 targetPos = new Vector3(player.transform.position.x, jumpHeight, transform.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, jumpSpeed * Time.deltaTime);
-
+                timer = 0;
+                StartCoroutine(FallDown());
+            }
+            else if(fromPlayer < 4)
+            {
+                StartCoroutine(Rush());
+                timer = 0;
             }
         }
-
-
-        base.Update();
     }
-    
+
+    IEnumerator FallDown()
+    {
+        while (transform.position.y <jumpHeight)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y + 0.12f, transform.position.z);
+            yield return new WaitForEndOfFrame();
+        }
+        this.transform.position = new Vector3(player.transform.position.x, 20, transform.position.z);
+        var attack = Instantiate(waringArea);
+        attack.transform.position = new Vector2(transform.position.x, -1);
+        var attackArea = attack.transform.GetChild(0);
+        while (transform.position.y > 0.1)
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y - 0.24f);
+            float dis=transform.position.y- 0.1f;
+            attackArea.transform.localScale = new Vector3(1 - dis / 20, 1 - dis / 20, 1);
+            yield return new WaitForEndOfFrame();
+        }
+        Destroy(attack);
+        timer = 0;
+    }
+
+    IEnumerator Rush()
+    {
+        var item = Instantiate(rushAtea);
+        item.transform.position=new Vector2(transform.position.x,transform.position.y-1); 
+        Vector2 forword = player.transform.position - transform.position;
+        if (forword.x < 0)
+        {
+            var warn = item.transform.GetChild(0);
+            float time = 1f;
+            while(time > 0)
+            {
+                warn.transform.localScale = new Vector3(1 - time, 1 - time, 1);
+                time -= 0.01f;
+                yield return new WaitForEndOfFrame();
+            }
+            while(transform.position.x> player.transform.position.x - rushDis)
+            {
+                transform.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
+                yield return new WaitForEndOfFrame();
+            }
+            Destroy(item);
+        }
+        timer = 0;
+    }
 }
