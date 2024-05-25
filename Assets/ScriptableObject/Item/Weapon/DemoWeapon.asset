@@ -15,3 +15,7 @@ MonoBehaviour:
   itemName: "\u6837\u4F8B\u6B66\u5668"
   itemImage: {fileID: 21300000, guid: 4f84e26e1d9ee4aa4ba25466ad58f920, type: 3}
   itemInfo: 
+  skillInfo:
+    cd: 2
+    skillEmitter: {fileID: -7102406243324459662, guid: 6a80e79b44cd43e4389eb7cdf07d140b,
+      type: 3}

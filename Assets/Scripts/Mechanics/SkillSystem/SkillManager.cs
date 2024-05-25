@@ -23,8 +23,8 @@ namespace Platformer.Mechanics.Skill
                 {
                     if (emitter != null)
                     {
+                        Instantiate(emitter);
                         currentCd = cd;
-                        emitter.Emit();
                     }
                 }
             }

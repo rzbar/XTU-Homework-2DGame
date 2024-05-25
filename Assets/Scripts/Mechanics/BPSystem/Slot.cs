@@ -4,7 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour
+namespace Platformer.Mechanics.BPSystem
 {
-    public Item slotItem;
+    public class Slot : MonoBehaviour
+    {
+        public int slotID;
+        public Item slotItem;
+    }
+
 }

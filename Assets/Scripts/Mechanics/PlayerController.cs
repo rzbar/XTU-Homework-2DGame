@@ -8,6 +8,7 @@ using Platformer.Core;
 using Platformer.Mechanics.AttackForm;
 using UnityEditor;
 using Platformer.Mechanics.Skill;
+using Platformer.Mechanics.BPSystem;
 
 namespace Platformer.Mechanics
 {
@@ -84,6 +85,7 @@ namespace Platformer.Mechanics
                 #endregion move
 
                 #region fight
+                UpdateSkillList();
                 //普攻槽位
                 if (Input.GetKeyDown(KeyCode.J))
                 {
@@ -240,6 +242,12 @@ namespace Platformer.Mechanics
             {
                 spriteRenderer.color = new Color(1, 1, 1, 1f);
             }
+        }
+
+        void UpdateSkillList()
+        {
+            
+            skillManager.emitters[0].emitter = InventoryManager.instance.GetItem(0).skillInfo.skillEmitter;
         }
     }
 }

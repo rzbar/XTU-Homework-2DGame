@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemOnRoad : MonoBehaviour
+namespace Platformer.Mechanics.BPSystem
 {
-    public Item thisItem;
-    public Inventroy playerInventroy;
+    public class ItemOnRoad : MonoBehaviour
+    {
+        public Item thisItem;
+        public Inventroy playerInventroy;
+    }
 }
+

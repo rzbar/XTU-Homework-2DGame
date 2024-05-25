@@ -18,6 +18,7 @@ namespace Platformer.Mechanics.Skill
             model.player.Invincibility++;
             yield return new WaitForSeconds(60*Time.deltaTime);
             model.player.Invincibility--;
+            finished = true;
         }
     }
 }

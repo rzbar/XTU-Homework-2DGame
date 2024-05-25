@@ -10,7 +10,20 @@ namespace Platformer.Mechanics.Skill
     public class SkillEmitter : MonoBehaviour
     {
         protected readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-        
+        protected bool finished = 0;
+
+        private void Awake()
+        {
+            Emit();
+        }
+
+        private void Update()
+        {
+            if (finished)
+            {
+                Destroy(gameObject);
+            }
+        }
         public virtual void Emit()
         {
             //TODO
