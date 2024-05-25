@@ -31,21 +31,21 @@ namespace Platformer.Mechanics.BPSystem
             return myBag.itemList[id];
         }
 
-        void RemoveItem(int id)
+        public void RemoveItem(int id)
         {
             var obj = slotGrid.transform.GetChild(id).gameObject.transform.GetChild(0);
             obj.GetComponent<Image>().sprite = null;
             myBag.itemList[id] = null;
         }
 
-        void UpdateItem(int id, Item what)
+        private void UpdateItem(int id, Item what)
         {
             var obj = slotGrid.transform.GetChild(id).gameObject.transform.GetChild(0);
             obj.GetComponent<Image>().sprite = what.itemImage;
             myBag.itemList[id] = what;
         }
 
-        void AddItem(Item what)
+        public void AddItem(Item what)
         {
             int id = 0;
             for (int i = 0; i < slotGrid.transform.childCount; i++)
