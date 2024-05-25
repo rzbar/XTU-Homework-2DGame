@@ -24,6 +24,7 @@ namespace Platformer.Mechanics
         public AudioClip ouchAudio;
         public AttackScriptableObject attackScriptableObject;
         public SkillManager skillManager;
+        public InventoryManager inventoryManager;
 
         /// <summary>
         /// Max horizontal speed of the player.
@@ -68,6 +69,7 @@ namespace Platformer.Mechanics
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
             skillManager = GetComponent<SkillManager>();
+            inventoryManager = GetComponent<InventoryManager>();
         }
 
         protected override void Update()
@@ -246,9 +248,9 @@ namespace Platformer.Mechanics
 
         void UpdateSkillList()
         {
-            skillManager.emitters[0].emitter ??= InventoryManager.instance.GetItem(0)?.skillInfo.skillEmitter;
-            skillManager.emitters[1].emitter ??= InventoryManager.instance.GetItem(1)?.skillInfo.skillEmitter;
-            skillManager.emitters[2].emitter ??= InventoryManager.instance.GetItem(2)?.skillInfo.skillEmitter;
+            skillManager.emitters[0].emitter ??= inventoryManager.GetItem(0)?.skillInfo.skillEmitter;
+            skillManager.emitters[1].emitter ??= inventoryManager.GetItem(1)?.skillInfo.skillEmitter;
+            skillManager.emitters[2].emitter ??= inventoryManager.GetItem(2)?.skillInfo.skillEmitter;
         }
     }
 }

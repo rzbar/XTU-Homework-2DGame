@@ -43,5 +43,6 @@ namespace Platformer.Model
         /// </summary>
         public AttackScriptableObject attackScriptableObject;
 
+
     }
 }

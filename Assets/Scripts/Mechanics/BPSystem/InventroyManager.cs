@@ -10,17 +10,10 @@ namespace Platformer.Mechanics.BPSystem
 {
     public class InventoryManager : MonoBehaviour
     {
-        public static InventoryManager instance;
 
         public Inventroy myBag;
         public GameObject slotGrid;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-        private void Awake()
-        {
-            if (instance != null)
-                Destroy(this);
-            instance = this;
-        }
 
         private void Start()
         {
