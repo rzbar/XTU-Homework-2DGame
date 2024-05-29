@@ -13,7 +13,6 @@ namespace Platformer.Mechanics
     public class GameController : MonoBehaviour
     {
         public static GameController Instance { get; private set; }
-        public GameObject boss0;
         public bool boss0Fight;
 
         //This model field is public and can be therefore be modified in the 
@@ -27,7 +26,6 @@ namespace Platformer.Mechanics
         void OnEnable()
         {
             Instance = this;
-            boss0.SetActive(false);
         }
 
         void OnDisable()
@@ -38,31 +36,8 @@ namespace Platformer.Mechanics
         void Update()
         {
             if (Instance == this) Simulation.Tick();
-            if (boss0Fight)
-            {
-                EnterBoss0();
-            }
-            else
-            {
-                OutBoss0();
-            }
         }
 
-        private void OutBoss0()
-        {
-            if (boss0.activeSelf)
-            {
-                boss0.SetActive(false);
-            }
-        }
-
-        private void EnterBoss0()
-        {
-            if (!boss0.activeSelf)
-            {
-                boss0.SetActive(true);
-            }
-
-        }
+        
     }
 }

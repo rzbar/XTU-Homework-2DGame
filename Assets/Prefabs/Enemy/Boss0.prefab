@@ -325,10 +325,10 @@ MonoBehaviour:
   distance: 3
   player: {fileID: 0}
   followSpeed: 1
-  isStop: 0
-  waitTime: 5
+  isStop: 1
+  waitTime: 4
   jumpHeight: 8
-  jumpSpeed: 2
+  jumpSpeed: 10
   skillManager: {fileID: 0}
   waringArea: {fileID: 2711264886233715678, guid: 7f575bb8ca9d89d40846469804b28b6b,
     type: 3}

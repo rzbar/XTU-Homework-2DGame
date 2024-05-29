@@ -16,7 +16,9 @@ public class Boss0 : FollowEnemy
     public GameObject rushAtea;
     public float rushDis;
     float timer = 0;
-
+    public GameObject bossUI;
+    private float leftBound;
+    private float rightBound;
     public GameObject rushEffect;
     protected override void Awake()
     {
@@ -25,22 +27,45 @@ public class Boss0 : FollowEnemy
         rushEffect.SetActive(false);
         jumpHeight += transform.position.y;
         nowHeight = transform.position.y;
+        isStop = true;
+        leftBound =path.transform.position.x + path.startPosition.x + 1.2f;
+        rightBound = path.transform.position.x + path.endPosition.x - 1.2f;
     }
     protected override void Update()
     {
-        timer += Time.deltaTime;
-        fromPlayer = Vector2.Distance(transform.position, player.transform.position);
-        if (timer > waitTime) {
-            if (fromPlayer > distance)
+        if (player.transform.position.x > path.transform.position.x + path.startPosition.x && player.transform.position.x < path.transform.position.x + path.endPosition.x)
+        {
+            if (player.transform.position.y < path.transform.position.y + path.startPosition.y + jumpHeight + 1 && player.transform.position.y > path.transform.position.y + path.startPosition.y - 1)
             {
-                timer = 0;
-                StartCoroutine(FallDown());
+                isStop = false;
             }
-            else if(fromPlayer < 4)
+        }
+        else
+        {
+            isStop = true;
+        }
+        if (!isStop)
+        {
+            bossUI.SetActive(true);
+            timer += Time.deltaTime;
+            fromPlayer = Vector2.Distance(transform.position, player.transform.position);
+            if (timer > waitTime)
             {
-                StartCoroutine(Rush());
-                timer = 0;
+                if (fromPlayer > distance)
+                {
+                    timer = 0;
+                    StartCoroutine(FallDown());
+                }
+                else if (fromPlayer < 4)
+                {
+                    StartCoroutine(Rush());
+                    timer = 0;
+                }
             }
+        }
+        else
+        {
+            bossUI.SetActive(!isStop);
         }
     }
 
@@ -48,16 +73,19 @@ public class Boss0 : FollowEnemy
     {
         while (transform.position.y <jumpHeight)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + 0.24f, transform.position.z);
+
+            control.velocity.y = jumpSpeed;
+            //transform.position = new Vector3(transform.position.x, transform.position.y + 0.24f, transform.position.z);
             yield return new WaitForEndOfFrame();
         }
-        this.transform.position = new Vector3(player.transform.position.x, 20, transform.position.z);
+        this.transform.position = new Vector2(Mathf.Clamp(player.transform.position.x,leftBound,rightBound), jumpHeight);
         var attack = Instantiate(waringArea);
         attack.transform.position = new Vector2(transform.position.x, nowHeight-1);
         var attackArea = attack.transform.GetChild(0);
         while (transform.position.y > nowHeight)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - 0.2f);
+            //transform.position = new Vector2(transform.position.x, transform.position.y - 0.2f);
+            control.velocity.y = -jumpSpeed;
             float dis=transform.position.y- 0.1f;
             attackArea.transform.localScale = new Vector3(1 - dis / 20, 1 - dis / 20, 1);
             yield return new WaitForEndOfFrame();
@@ -79,13 +107,13 @@ public class Boss0 : FollowEnemy
             while(time > 0)
             {
                 warn.transform.localScale = new Vector3(1 - time, 1 - time, 1);
-                time -= 0.01f;
+                time -= 0.02f;
                 yield return null;
             }
             rushEffect.SetActive(false);
-            while(transform.position.x> item.transform.position.x - rushDis)
+            while(transform.position.x> Mathf.Clamp(item.transform.position.x - rushDis,leftBound,rightBound))
             {
-                transform.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
+                control.move.x = -3;
                 yield return null;
             }
         }
@@ -96,17 +124,17 @@ public class Boss0 : FollowEnemy
             while (time > 0)
             {
                 warn.transform.localScale = new Vector3(1 - time, 1 - time, 1);
-                time -= 0.01f;
+                time -= 0.02f;
                 yield return null;
             }
             rushEffect.SetActive(false);
-            while (transform.position.x < item.transform.position.x + rushDis)
+            while (transform.position.x < Mathf.Clamp(item.transform.position.x + rushDis, leftBound,rightBound))
             {
-                transform.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
+                control.move.x = 3;
                 yield return null;
             }
         }
-
+        control.move.x = 0;
         Destroy(item);
         timer = 0;
     }

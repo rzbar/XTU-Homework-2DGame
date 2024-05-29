@@ -109,7 +109,6 @@ namespace Platformer.Mechanics
                 velocity += Physics2D.gravity * Time.deltaTime;
 
             velocity.x = targetVelocity.x;
-
             IsGrounded = false;
 
             var deltaPosition = velocity * Time.deltaTime;
