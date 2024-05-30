@@ -8,14 +8,23 @@ namespace Platformer.Mechanics.Skill
     {
         public List<SkillInfo> emitters = new List<SkillInfo>();
 
+
+        private void Awake()
+        {
+            foreach(var emi in emitters)
+            {
+                emi.owner = gameObject;
+            }
+        }
+
         [System.Serializable]
         public class SkillInfo
         {
             public int id;
-            public string name;
             public float cd;
             public float currentCd;
             public SkillEmitter emitter;
+            public GameObject owner;
 
             public void EmitSkill()
             {

@@ -23,6 +23,7 @@ namespace Platformer.Mechanics.Skill
                 model.player.Teleport(model.player.transform.position + new Vector3(3.3f * Mathf.Cos(obj.dir * Mathf.Deg2Rad), 3.3f * Mathf.Sin(obj.dir * Mathf.Deg2Rad), 0));
                 yield return new WaitForSeconds(0.05f);
             }
+            finished = true;
             model.player.Invincibility--;
         }
 

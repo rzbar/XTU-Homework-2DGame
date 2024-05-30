@@ -8,8 +8,8 @@ namespace Platformer.Mechanics.BPSystem
 {
     public class Slot : MonoBehaviour
     {
-        public int slotID;
         public Item slotItem;
+        public bool locked = false;
     }
 
 }

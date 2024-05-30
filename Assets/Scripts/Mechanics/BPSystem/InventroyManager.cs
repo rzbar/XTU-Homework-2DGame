@@ -37,8 +37,11 @@ namespace Platformer.Mechanics.BPSystem
             {
                 return;
             }
-            var obj = slotGrid.transform.GetChild(id).gameObject.transform.GetChild(0);
-            obj.GetComponent<Image>().sprite = what.itemImage;
+            var obj = slotGrid.transform.GetChild(0).gameObject.transform.GetChild(id);
+            if(obj!= null)
+            {
+                obj.GetComponent<Image>().sprite = what.itemImage;
+            }
             myBag.itemList[id] = what;
         }
 
