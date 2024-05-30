@@ -7,13 +7,12 @@ namespace Platformer.Mechanics.Skill
     public class SkillManager : MonoBehaviour
     {
         public List<SkillInfo> emitters = new List<SkillInfo>();
-
-
         private void Awake()
         {
             foreach(var emi in emitters)
             {
-                emi.emitter.owner = gameObject;
+                if (emi.emitter != null)
+                    emi.emitter.owner = gameObject;
             }
         }
 
