@@ -11,6 +11,7 @@ namespace Platformer.Mechanics.Skill
     {
         protected readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
         protected bool finished = false;
+        public GameObject owner;
 
         private void Awake()
         {

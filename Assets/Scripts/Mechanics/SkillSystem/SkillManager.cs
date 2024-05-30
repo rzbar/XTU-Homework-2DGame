@@ -13,7 +13,7 @@ namespace Platformer.Mechanics.Skill
         {
             foreach(var emi in emitters)
             {
-                emi.owner = gameObject;
+                emi.emitter.owner = gameObject;
             }
         }
 
@@ -24,7 +24,6 @@ namespace Platformer.Mechanics.Skill
             public float cd;
             public float currentCd;
             public SkillEmitter emitter;
-            public GameObject owner;
 
             public void EmitSkill()
             {
