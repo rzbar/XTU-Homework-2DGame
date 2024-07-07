@@ -44,7 +44,7 @@ namespace Platformer.Mechanics.Skill
                 while (time > 0)
                 {
                     warn.transform.localScale = new Vector3(1 - time, 1 - time, 1);
-                    time -= 0.02f;
+                    time -= 0.013f;
                     yield return null;
                 }
                 Destroy(eff);
@@ -61,7 +61,7 @@ namespace Platformer.Mechanics.Skill
                 while (time > 0)
                 {
                     warn.transform.localScale = new Vector3(1 - time, 1 - time, 1);
-                    time -= 0.02f;
+                    time -= 0.013f;
                     yield return null;
                 }
                 Destroy(eff);

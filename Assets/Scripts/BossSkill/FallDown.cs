@@ -44,12 +44,15 @@ namespace Platformer.Mechanics.Skill
             while (enemy.transform.position.y > nowHeight)
             {
                 enemy.control.velocity.y = -jumpSpeed;
-                float dis = enemy.transform.position.y - 0.1f;
-                attackArea.transform.localScale = new Vector3(1 - dis / 20, 1 - dis / 20, 1);
+                float dis = enemy.transform.position.y - nowHeight;
+                attackArea.transform.localScale = new Vector3(1 - dis / (jumpHeight-nowHeight), 1 - dis / (jumpHeight - nowHeight), 1);
                 yield return new WaitForEndOfFrame();
             }
+
             Destroy(attack);
         }
+
+
 
         
     }

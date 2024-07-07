@@ -1,10 +1,13 @@
+using Platformer.Gameplay;
 using Platformer.Mechanics;
 using Platformer.Mechanics.Skill;
 using System.Collections;
 using System.Collections.Generic;
+using static Platformer.Core.Simulation;
 using System.Linq;
 using UnityEngine;
 [RequireComponent(typeof(SkillManager))]
+
 public class Boss0 : FollowEnemy
 {
     public float waitTime;
@@ -22,7 +25,7 @@ public class Boss0 : FollowEnemy
     {
         if (player.transform.position.x > path.transform.position.x + path.startPosition.x && player.transform.position.x < path.transform.position.x + path.endPosition.x)
         {
-            if (player.transform.position.y < path.transform.position.y + path.startPosition.y + 10+ 1 && player.transform.position.y > path.transform.position.y + path.startPosition.y - 1)
+            if (player.transform.position.y < path.transform.position.y + path.startPosition.y + 10 + 1 && player.transform.position.y > path.transform.position.y + path.startPosition.y - 1)
             {
                 isStop = false;
             }
@@ -60,21 +63,31 @@ public class Boss0 : FollowEnemy
     {
         int total = seed.Sum();
         int randint = Random.Range(0, total - 1);
-        for(int i = 1; i < seed.Length; i++)
+        for (int i = 1; i < seed.Length; i++)
         {
             seed[i] += seed[i - 1];
         }
         for (int i = 0; i < seed.Length; i++)
         {
-            if(randint < seed[i])
+            if (randint < seed[i])
             {
-                
+
                 skillManager.emitters[i].EmitSkill();
                 break;
             }
         }
-        
+
+    }
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+
+        if (collision.gameObject.tag == "Player")
+        {
+            var ev = Schedule<PlayerEnemyCollision>();
+            ev.player = player;
+            ev.enemy = this;
+        }
     }
 
-  
 }
