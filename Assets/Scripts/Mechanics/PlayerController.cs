@@ -54,6 +54,8 @@ namespace Platformer.Mechanics
 
         [SerializeField]
         private int invincibility = 0;
+        
+        public float invincibilityTime = 0.6f;
 
 
         public Bounds Bounds => collider2d.bounds;
@@ -231,6 +233,7 @@ namespace Platformer.Mechanics
             {
                 var ev = Schedule<PlayerHurt>();
                 ev.dmg = attact.damage;
+                
             }
         }
 
@@ -251,6 +254,13 @@ namespace Platformer.Mechanics
             skillManager.emitters[0].emitter ??= inventoryManager.GetItem(1)?.skillInfo.skillEmitter;
             skillManager.emitters[1].emitter ??= inventoryManager.GetItem(2)?.skillInfo.skillEmitter;
             skillManager.emitters[2].emitter ??= inventoryManager.GetItem(3)?.skillInfo.skillEmitter;
+        }
+
+        public IEnumerator GiveInvincible(float time)
+        {
+            Invincibility++;
+            yield return new WaitForSeconds(time);
+            Invincibility--;
         }
     }
 }

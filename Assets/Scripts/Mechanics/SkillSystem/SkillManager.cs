@@ -11,7 +11,7 @@ namespace Platformer.Mechanics.Skill
         {
             foreach(var emi in emitters)
             {
-                if (emi.emitter != null)
+                if(emi.emitter != null)
                     emi.emitter.owner = gameObject;
             }
         }

@@ -29,9 +29,12 @@ namespace Platformer.Gameplay
                 if (player.audioSource && player.ouchAudio)
                     player.audioSource.PlayOneShot(player.ouchAudio);
                 player.animator.SetTrigger("hurt");
+                
+                model.player.StartCoroutine(model.player.GiveInvincible(model.player.invincibilityTime));
                 //player.animator.SetBool("dead", true);
                 //Simulation.Schedule<PlayerSpawn>(2);
             }
         }
+
     }
 }

@@ -1,5 +1,7 @@
 using Platformer.Core;
 using Platformer.Mechanics;
+using System.Collections;
+using UnityEngine;
 
 namespace Platformer.Gameplay
 {
@@ -17,6 +19,13 @@ namespace Platformer.Gameplay
             enemy.control.enabled = false;
             if (enemy._audio && enemy.ouch)
                 enemy._audio.PlayOneShot(enemy.ouch);
+            Kill();
+        }
+
+        IEnumerator Kill()
+        {
+            yield return new WaitForSeconds(1f);
+            GameObject.Destroy(enemy.gameObject);
         }
     }
 }

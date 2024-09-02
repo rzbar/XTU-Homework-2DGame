@@ -17,6 +17,8 @@ namespace Platformer.Gameplay
         public EnemyController enemy;
         public PlayerController player;
 
+        private float Collidmg = 2;
+
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         public override void Execute()
@@ -49,7 +51,8 @@ namespace Platformer.Gameplay
             {
                 if (player.Invincibility == 0)
                 {
-                    Schedule<PlayerHurt>();
+                    var ev = Schedule<PlayerHurt>();
+                    ev.dmg = Collidmg;
                 }
             }
         }
