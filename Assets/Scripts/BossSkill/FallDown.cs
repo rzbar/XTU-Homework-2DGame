@@ -21,7 +21,7 @@ namespace Platformer.Mechanics.Skill
         private float rightBound;
         public override void Emit()
         {
-            enemy = GameObject.Find("Boss0").gameObject.GetComponent<Boss0>();
+            enemy = owner.GetComponent<Boss0>();
             player=model.player;
             leftBound = enemy.path.transform.position.x + enemy.path.startPosition.x + 1.2f;
             rightBound = enemy.path.transform.position.x + enemy.path.endPosition.x - 1.2f;
@@ -37,7 +37,6 @@ namespace Platformer.Mechanics.Skill
                 enemy.control.velocity.y = jumpSpeed;
                 yield return new WaitForEndOfFrame();
             }
-            print(8);
             enemy.transform.position = new Vector2(Mathf.Clamp(player.transform.position.x, leftBound, rightBound), jumpHeight);
             var attack = Instantiate(waringArea);
             attack.transform.position = new Vector2(enemy.transform.position.x, nowHeight - 1);
@@ -45,12 +44,15 @@ namespace Platformer.Mechanics.Skill
             while (enemy.transform.position.y > nowHeight)
             {
                 enemy.control.velocity.y = -jumpSpeed;
-                float dis = enemy.transform.position.y - 0.1f;
-                attackArea.transform.localScale = new Vector3(1 - dis / 20, 1 - dis / 20, 1);
+                float dis = enemy.transform.position.y - nowHeight;
+                attackArea.transform.localScale = new Vector3(1 - dis / (jumpHeight-nowHeight), 1 - dis / (jumpHeight - nowHeight), 1);
                 yield return new WaitForEndOfFrame();
             }
+
             Destroy(attack);
         }
+
+
 
         
     }

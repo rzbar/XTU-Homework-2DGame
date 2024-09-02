@@ -17,8 +17,9 @@ namespace Platformer.Gameplay
 
         public override void Execute()
         {
-            model.player.animator.SetTrigger("victory");
-            model.player.controlEnabled = false;
+            //model.player.animator.SetTrigger("victory");
+            //model.player.controlEnabled = false;
+            model.player.transform.position = new UnityEngine.Vector3(155, -6, 0);
         }
     }
 }

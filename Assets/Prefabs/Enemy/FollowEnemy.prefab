@@ -558,9 +558,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 0}
   ouch: {fileID: 8300000, guid: b7f741588644cd64bbee6387cb54a96d, type: 3}
-  distance: 5
+  distance: 3
   player: {fileID: 0}
   followSpeed: 0.3
+  isStop: 0
 --- !u!114 &2314053718685785492
 MonoBehaviour:
   m_ObjectHideFlags: 0
