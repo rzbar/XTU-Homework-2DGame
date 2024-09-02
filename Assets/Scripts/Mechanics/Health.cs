@@ -19,18 +19,36 @@ namespace Platformer.Mechanics
         /// <summary>
         /// Indicates if the entity should be considered 'alive'.
         /// </summary>
-        public bool IsAlive => currentHP > 0;
+        public bool IsAlive => CurrentHP > 0;
 
-        public float currentHP;
+        public float CurrentHP {
+            get
+            {
+                return currentHP;
+            }
+            set
+            {
+                currentHP = value;
+                if (hpBar != null)
+                {
+                    Vector3 v = hpBar.rectTransform.localScale;
+                    hpBar.rectTransform.localScale = new Vector3((currentHP / maxHP), v.y, v.z);
+                }
+            }
+        }
+
+        private float currentHP;
+
 
         public Image hpBar;
+
 
         /// <summary>
         /// Increment the HP of the entity.
         /// </summary>
         public void Increment(float heal)
         {
-            currentHP = Mathf.Clamp(currentHP + heal, 0, maxHP);
+            CurrentHP = Mathf.Clamp(CurrentHP + heal, 0, maxHP);
         }
 
         /// <summary>
@@ -39,13 +57,8 @@ namespace Platformer.Mechanics
         /// </summary>
         public void Decrement(float damage)
         {
-            currentHP = Mathf.Clamp(currentHP - damage, 0, maxHP);
-            if(hpBar!=null)
-            {
-                Vector3 v = hpBar.rectTransform.localScale;
-                hpBar.rectTransform.localScale = new Vector3((currentHP / maxHP), v.y, v.z);
-            }
-            if (currentHP == 0)
+            CurrentHP = Mathf.Clamp(CurrentHP - damage, 0, maxHP);
+            if (CurrentHP == 0)
             {
                 
                 var ev = Schedule<HealthIsZero>();
@@ -58,12 +71,12 @@ namespace Platformer.Mechanics
         /// </summary>
         public void Die()
         {
-            while (currentHP > 0) Decrement(100f);
+            while (CurrentHP > 0) Decrement(100f);
         }
 
         void Awake()
         {
-            currentHP = maxHP;
+            CurrentHP = maxHP;
         }
     }
 }

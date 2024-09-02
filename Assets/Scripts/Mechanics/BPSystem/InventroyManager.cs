@@ -26,7 +26,7 @@ namespace Platformer.Mechanics.BPSystem
 
         public void RemoveItem(int id)
         {
-            var obj = slotGrid.transform.GetChild(id).gameObject.transform.GetChild(0);
+            var obj = slotGrid.transform.GetChild(id / 6).gameObject.transform.GetChild(id % 6).gameObject.transform.GetChild(0);
             obj.GetComponent<Image>().sprite = null;
             myBag.itemList[id] = null;
         }
@@ -37,12 +37,11 @@ namespace Platformer.Mechanics.BPSystem
             {
                 return;
             }
-            var obj = slotGrid.transform.GetChild(0).gameObject.transform.GetChild(id);
+            var obj = slotGrid.transform.GetChild(id / 6).gameObject.transform.GetChild(id % 6).gameObject.transform.GetChild(0);
             if(obj!= null)
             {
                 obj.GetComponent<Image>().sprite = what.itemImage;
             }
-            myBag.itemList[id] = what;
         }
 
         public void AddItem(Item what)
@@ -50,7 +49,7 @@ namespace Platformer.Mechanics.BPSystem
             int id = 0;
             for (int i = 0; i < slotGrid.transform.childCount; i++)
             {
-                var obj = slotGrid.transform.GetChild(i).gameObject.transform.GetChild(0);
+                var obj = slotGrid.transform.GetChild(id / 6).gameObject.transform.GetChild(id % 6).gameObject.transform.GetChild(0);
                 if (obj.GetComponent<Image>().sprite != null)
                 {
                     continue;
