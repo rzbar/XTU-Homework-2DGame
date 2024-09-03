@@ -14,14 +14,8 @@ namespace Platformer.Mechanics.BPSystem
         [TextArea]
         public string itemInfo;
 
-        public SkillInfo skillInfo;
+        public SkillManager.SkillInfo skillInfo;
 
-        [System.Serializable]
-        public class SkillInfo
-        {
-            public float cd;
-            public SkillEmitter skillEmitter;
-        }
     }
 }
 

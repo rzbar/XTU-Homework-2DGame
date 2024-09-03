@@ -1,18 +1,22 @@
+using Platformer.Mechanics.BPSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Platformer.Mechanics.Skill
 {
     public class SkillManager : MonoBehaviour
     {
+        
         public List<SkillInfo> emitters = new List<SkillInfo>();
         private void Awake()
         {
             foreach(var emi in emitters)
             {
-                if(emi.emitter != null)
-                    emi.emitter.owner = gameObject;
+                if(emi.skillEmitter != null)
+                    emi.skillEmitter.owner = gameObject;
             }
         }
 
@@ -22,15 +26,15 @@ namespace Platformer.Mechanics.Skill
             public int id;
             public float cd;
             public float currentCd;
-            public SkillEmitter emitter;
+            public SkillEmitter skillEmitter;
 
             public void EmitSkill()
             {
                 if (currentCd <= 0)
                 {
-                    if (emitter != null)
+                    if (skillEmitter != null)
                     {
-                        Instantiate(emitter);
+                        Instantiate(skillEmitter);
                         currentCd = cd;
                     }
                 }
@@ -39,9 +43,10 @@ namespace Platformer.Mechanics.Skill
 
         private void Update()
         {
-            foreach (SkillInfo info in emitters)
+            for(int i = 0; i< emitters.Count; i++)
             {
-                info.currentCd = Mathf.Clamp(info.currentCd - Time.deltaTime,0,info.cd);
+                SkillInfo info = emitters[i];
+                info.currentCd = Mathf.Clamp(info.currentCd - Time.deltaTime, 0, info.cd);
             }
         }
 

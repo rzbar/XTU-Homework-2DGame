@@ -10,13 +10,15 @@ namespace Platformer.Mechanics.BPSystem
 {
     public class InventoryManager : MonoBehaviour
     {
-
+        private static InventoryManager instance;
         public Inventroy myBag;
         public GameObject slotGrid;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
+        public static InventoryManager Instance => instance;
         private void Start()
         {
+            instance = this;
             UpdateBagpack();
         }
         public Item GetItem(int id)
@@ -29,6 +31,16 @@ namespace Platformer.Mechanics.BPSystem
             var obj = slotGrid.transform.GetChild(id / 6).gameObject.transform.GetChild(id % 6).gameObject.transform.GetChild(0);
             obj.GetComponent<Image>().sprite = null;
             myBag.itemList[id] = null;
+        }
+        public Slot GetSlot(int id)
+        {
+            var obj = slotGrid.transform.GetChild(id / 6).gameObject.transform.GetChild(id % 6);
+            if (obj != null)
+            {
+                print(obj.name);
+                return obj.GetComponent<Slot>();
+            }
+            else return null;
         }
 
         private void UpdateItem(int id, Item what)

@@ -251,9 +251,9 @@ namespace Platformer.Mechanics
 
         void UpdateSkillList()
         {
-            skillManager.emitters[0].emitter ??= inventoryManager.GetItem(1)?.skillInfo.skillEmitter;
-            skillManager.emitters[1].emitter ??= inventoryManager.GetItem(2)?.skillInfo.skillEmitter;
-            skillManager.emitters[2].emitter ??= inventoryManager.GetItem(3)?.skillInfo.skillEmitter;
+            skillManager.emitters[0].skillEmitter ??= inventoryManager.GetItem(1)?.skillInfo.skillEmitter;
+            skillManager.emitters[1].skillEmitter ??= inventoryManager.GetItem(2)?.skillInfo.skillEmitter;
+            skillManager.emitters[2].skillEmitter ??= inventoryManager.GetItem(3)?.skillInfo.skillEmitter;
         }
 
         public IEnumerator GiveInvincible(float time)
